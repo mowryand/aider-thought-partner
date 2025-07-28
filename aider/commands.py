@@ -169,7 +169,7 @@ class Commands:
                     "Automatically identify which files will need to be edited.",
                 ),
                 (
-                    "thought_partner",
+                    "thought-partner",
                     "Engage in a dialogue to explore ideas and clarify intentions."
                 ),
             ]
@@ -199,6 +199,8 @@ class Commands:
             edit_format = self.coder.main_model.edit_format
             summarize_from_coder = False
         elif ef == "ask":
+            summarize_from_coder = False
+        elif ef == "thought-partner":
             summarize_from_coder = False
 
         raise SwitchCoder(
@@ -1173,6 +1175,9 @@ class Commands:
     def completions_context(self):
         raise CommandCompletionException()
 
+    def completions_thought_partner(self):
+        raise CommandCompletionException()
+
     def cmd_ask(self, args):
         """Ask questions about the code base without editing any files. If no prompt provided, switches to ask mode."""  # noqa
         return self._generic_chat_command(args, "ask")
@@ -1188,6 +1193,10 @@ class Commands:
     def cmd_context(self, args):
         """Enter context mode to see surrounding code context. If no prompt provided, switches to context mode."""  # noqa
         return self._generic_chat_command(args, "context", placeholder=args.strip() or None)
+
+    def cmd_thought_partner(self, args):
+        """Enter thought partner mode for Socratic questioning. If no prompt provided, switches to thought partner mode."""  # noqa
+        return self._generic_chat_command(args, "thought-partner")
 
     def _generic_chat_command(self, args, edit_format, placeholder=None):
         if not args.strip():
