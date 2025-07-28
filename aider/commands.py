@@ -168,6 +168,10 @@ class Commands:
                     "context",
                     "Automatically identify which files will need to be edited.",
                 ),
+                (
+                    "thought_partner",
+                    "Engage in a dialogue to explore ideas and clarify intentions."
+                ),
             ]
         )
 
